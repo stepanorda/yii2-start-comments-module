@@ -42,10 +42,10 @@ class Comments extends Widget
     {
         $class = $this->model;
         $class = Yii::$app->base->crc32($class::className());
-        $models = Comment::getTree($this->model->id, $class);
+        $models = Comment::getTree($this->model->primaryKey, $class);
         $model = new Comment(['scenario' => 'create']);
         $model->model_class = $class;
-        $model->model_id = $this->model->id;
+        $model->model_id = $this->model->primaryKey;
 
         return $this->render('index', [
                 'models' => $models,
